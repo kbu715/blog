@@ -2,3 +2,13 @@
     background: #343a40;
     color: #fff;
 }
+
+#page-header {
+    height: 200px;
+    background: url("../assets/image/image.jpg");
+    background-position: 24% 55%;  // 가로 세로 순서
+    background-attachment: fixed;
+    color: #fff;
+    border-bottom: 1px #eee solid;
+    padding-top: 60px;
+  }
