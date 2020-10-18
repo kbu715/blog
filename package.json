@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./server/server.js --exec babel-node",
-    "dev-watch": "babel-watch server/server.js --ignore'./client'"
+    "dev": "nodemon ./server/server.js --exec babel-node"
   },
   "keywords": [],
   "author": "",
