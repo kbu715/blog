@@ -11,7 +11,7 @@ import {
 
 ////////////// Login
 
-const loginUserAPI = (loginData) => {
+const loginUserAPI = (loginData) => { //서바와 통신을 하기 때문에 API라는 이름을 붙힌듯하다.
   console.log(loginData);
   const config = {
     //postman에서 설정 해줬던 것과 같다.

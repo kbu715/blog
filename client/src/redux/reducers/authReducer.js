@@ -44,7 +44,7 @@ const authReducer = (state = initialState, action) => {
                 userRole: null,
                 isAuthenticated: false,
                 isLoading: false,
-                errorMsg: action.payload.data.msg,
+                errorMsg: action.payload.data.msg, //server의 routes/api/auth.js 를 참고하자
             }
         case CLEAR_ERROR_REQUEST:
             return {
