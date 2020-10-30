@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux'
 import {connectRouter} from 'connected-react-router'
-
+import authReducer from './authReducer'
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history), //향후에 history를 사용한 connectRouter를 router를 통해 불러온다.
+    auth: authReducer
 })// reducer를 이런식으로 명명하여 사용한다.
 
 export default createRootReducer;
