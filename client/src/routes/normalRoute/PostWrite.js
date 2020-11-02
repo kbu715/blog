@@ -46,7 +46,7 @@ const PostWrite = () => {
     console.log(data);
 
     if (data && data.match("<img src=")) {
-      const whereImg_start = data.indexOf("<img src=");
+      const whereImg_start = data.indexOf("<img src="); //시작하는 위치를 잡아낸다. 없으면 -1을 리턴한다.
       console.log(whereImg_start);
       let whereImg_end = "";
       let ext_name_find = "";
@@ -56,7 +56,7 @@ const PostWrite = () => {
 
       for (let i = 0; i < ext_name.length; i++) {
         if (data.match(ext_name[i])) {
-          console.log(data.indexOf(`${ext_name[i]}`));
+          console.log(data.indexOf(`${ext_name[i]}`)); 
           ext_name_find = ext_name[i];
           whereImg_end = data.indexOf(`${ext_name[i]}`);
         }
@@ -122,7 +122,7 @@ const PostWrite = () => {
               block
               className="mt-3 col-md-2 offset-md-10 mb-3"
             >
-              제출하기
+              등록
             </Button>
           </FormGroup>
         </Form>

@@ -5,7 +5,7 @@ const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    index: true, //검색에 용이
+    index: true,
   },
   contents: {
     type: String,

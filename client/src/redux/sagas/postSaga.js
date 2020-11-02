@@ -41,40 +41,40 @@ function* watchLoadPosts() {
 // Post Upload
 
 const uploadPostAPI = (payload) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const token = payload.token;
-    if (token) {
-      config.headers["x-auth-token"] = token;
-    }
-    return axios.post("/api/post", payload, config);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
   };
-  
-  function* uploadPosts(action) {
-    try {
-      console.log(action, "uploadPost function");
-      const result = yield call(uploadPostAPI, action.payload);
-      console.log(result, "uploadPostAPI, action.payload");
-      yield put({
-        type: POST_UPLOADING_SUCCESS,
-        payload: result.data,
-      });
-      yield put(push(`/post/${result.data._id}`));
-    } catch (e) {
-      yield put({
-        type: POST_UPLOADING_FAILURE,
-        payload: e,
-      });
-      yield put(push("/"));
-    }
+  const token = payload.token;
+  if (token) {
+    config.headers["x-auth-token"] = token;
   }
-  
-  function* watchuploadPosts() {
-    yield takeEvery(POST_UPLOADING_REQUEST, uploadPosts);
+  return axios.post("/api/post", payload, config);
+};
+
+function* uploadPosts(action) {
+  try {
+    console.log(action, "uploadPost function");
+    const result = yield call(uploadPostAPI, action.payload);
+    console.log(result, "uploadPostAPI, action.payload");
+    yield put({
+      type: POST_UPLOADING_SUCCESS,
+      payload: result.data,
+    });
+    yield put(push(`/post/${result.data._id}`)); //프론트에서 post detail 페이지로 넘어가게 한다.
+  } catch (e) {
+    yield put({
+      type: POST_UPLOADING_FAILURE,
+      payload: e,
+    });
+    yield put(push("/"));
   }
+}
+
+function* watchuploadPosts() {
+  yield takeEvery(POST_UPLOADING_REQUEST, uploadPosts);
+}
 
 
 export default function* postSaga() {
