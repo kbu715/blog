@@ -33,6 +33,7 @@ mongoose.connect(MONGO_URI, {
     useNewUrlParser:true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify: false,
 }).then(()=>console.log('MongoDB connecting Success!!!')).catch(e=>console.log(e));
 
 //Use routes // router: 책갈피 같은것
