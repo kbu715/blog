@@ -143,6 +143,34 @@ router.get("/:id", async (req, res, next) => {
 
 
 
+// @route    Delete api/post/:id
+// @desc     Delete a Post
+// @access   Private
+
+router.delete("/:id", auth, async (req, res) => {
+  await Post.deleteMany({ _id: req.params.id });
+  await User.findByIdAndUpdate(req.user.id, {
+    $pull: { // pull : 배열에서 당긴다 -> 빼낸다.
+      posts: req.params.id,
+      comments: { post_id: req.params.id },
+    },
+  });
+  const CategoryUpdateResult = await Category.findOneAndUpdate(
+    { posts: req.params.id },
+    { $pull: { posts: req.params.id } },
+    { new: true } // { new: true } 설정 해줘야 update가 된다고한다.
+  );
+
+
+    //test
+     console.log("test!!!!", CategoryUpdateResult, CategoryUpdateResult._id);
+
+  if (CategoryUpdateResult.posts.length === 0) {
+    await Category.deleteMany({ _id: CategoryUpdateResult._id });
+  }
+  return res.json({ success: true });
+});
+
 
 export default router;
 
