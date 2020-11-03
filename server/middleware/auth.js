@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, JWT_SECRET); // 토큰을 해석!!
-    req.user = decoded;
+    req.user = decoded; 
     next();
   } catch (e) {
     console.log(e);

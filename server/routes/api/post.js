@@ -73,7 +73,7 @@ router.post("/", auth, uploadS3.none(), async (req, res, next) => {
             title,
             contents,
             fileUrl,
-            creator,
+            creator: req.user.id,
             date: moment().format("YYYY-MM-DD hh:mm:ss"),
         });
 
@@ -83,12 +83,12 @@ router.post("/", auth, uploadS3.none(), async (req, res, next) => {
 
         console.log(findResult, "Find Result!!!!");
 
-        if (isNullOrUndefined(findResult)) {
+        if (findResult === null | findResult === undefined) {
           const newCategory = await Category.create({
             categoryName: category,
           });
           await Post.findByIdAndUpdate(newPost._id, {
-            $push: { category: newCategory._id }, //배열에 값을 넣거나 그냥 값을 넣을 경우 $push를 쓴다. (Post 모델의 category를 참조하자.)
+            $push: { category: newCategory._id }, //배열에 값을 넣을 경우 $push를 쓴다. (Post 모델의 category를 참조하자.)
           });
           await Category.findByIdAndUpdate(newCategory._id, {
             $push: { posts: newPost._id },

@@ -53,7 +53,7 @@ router.post("/", (req, res) => {
 
           newUser.password = hash;
           newUser.save().then((user) => {
-            jwt.sign(
+            jwt.sign( // 토큰생성한다.
               { id: user.id },//user.id라고 하는 것은 바로 User 모델의 _id를 바로 불러올때 사용하는 것입니다
               JWT_SECRET,
               { expiresIn: 3600 }, //"10h"  "10d" 이런식으로 쓸 수 있다. 3600 => 3600s
