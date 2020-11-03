@@ -11,6 +11,12 @@ import {
   POST_UPLOADING_REQUEST,
   POST_UPLOADING_SUCCESS,
   POST_UPLOADING_FAILURE,
+  POST_EDIT_LOADING_REQUEST,
+  POST_EDIT_LOADING_SUCCESS,
+  POST_EDIT_LOADING_FAILURE,
+  POST_EDIT_UPLOADING_REQUEST,
+  POST_EDIT_UPLOADING_SUCCESS,
+  POST_EDIT_UPLOADING_FAILURE,
 } from "../types";
 
 const initialState = {
@@ -95,6 +101,44 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case POST_DETAIL_LOADING_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case POST_EDIT_LOADING_REQUEST:
+      return {
+        ...state,
+        posts: [],
+        loading: true,
+      };
+    case POST_EDIT_LOADING_SUCCESS:
+      return {
+        ...state,
+        postDetail: action.payload,
+
+        loading: false,
+      };
+    case POST_EDIT_LOADING_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    case POST_EDIT_UPLOADING_REQUEST:
+      return {
+        ...state,
+
+        loading: true,
+      };
+    case POST_EDIT_UPLOADING_SUCCESS:
+      return {
+        ...state,
+        posts: action.payload,
+        isAuthenticated: true,
+        loading: false,
+      };
+    case POST_EDIT_UPLOADING_FAILURE:
       return {
         ...state,
         error: action.payload,
